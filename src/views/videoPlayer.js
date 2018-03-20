@@ -3,6 +3,11 @@ var VideoPlayerView = Backbone.View.extend({
   initialize: function() {
     this.render();
     this.listenTo(this.collection, 'select', this.passVideo);
+    this.listenTo(this.collection, 'sync', function() {
+      // console.log(this);
+      this.model = this.collection.models[0];
+      this.model.select();
+    });
     // console.log(this.collection);
     // this.collection.on('eventHandler', () => passVideo(event.target));
     // event listener to select in videoListView that invokes passVideo method
